@@ -8,7 +8,7 @@
 
 This project analyzes large-scale financial transaction data to uncover spending patterns, understand consumer behavior, and identify fraudulent activities. By combining Python-based data analysis with Power BI visualizations, it delivers actionable insights to support strategic business decision-making.
 
-## 🛠️ Technical Stack Summary
+### 🛠️ Technical Stack Summary
 
 | Component | Technology | Purpose |
 |-----------|-----------|---------|
@@ -24,19 +24,16 @@ This project analyzes large-scale financial transaction data to uncover spending
 ## 💼 Business Problem
 
 Modern financial institutions operate in a data-driven ecosystem where they face critical challenges:
-
 1. **Fraud Prevention:** Real-time identification of suspicious transactions to minimize financial losses
 2. **Customer Intelligence:** Transaction history analysis for user segmentation and spending behavior prediction to enhance marketing effectiveness
 3. **Operational Excellence:** Performance monitoring and optimization across card types, merchants, and transaction channels
 
----
 
 ## 🎯 Project Objectives
 
 Build an intelligent Business Intelligence Dashboard that provides executives and managers with comprehensive visibility into system health. This dashboard goes beyond traditional reporting to deliver decision support capabilities through:
-
 - **Strategic Insights:** Holistic views of business performance and trends
-- **Operational Analytics:** Real-time monitoring of transaction systems and error patterns
+- **Operational Analytics:** Help monitoring of transaction systems and error patterns
 - **Customer Intelligence:** Deep understanding of user segments and behavior
 - **Risk Management:** Proactive fraud detection and security threat identification
 
@@ -59,22 +56,6 @@ This comprehensive financial dataset combines transaction records, customer info
 - **Size:** 6,146 rows; 13 columns
 - **Description:** Credit and debit card details linked to customer accounts
 - **Key Features:**
-
-| Column | Type | Description |
-|--------|------|-------------|
-| `id` | Integer | Unique card identifier |
-| `client_id` | Integer | Customer account identifier |
-| `card_brand` | String | Card network (Visa, Mastercard, Discover, American Express) |
-| `card_type` | String | Card classification (Debit, Credit, Prepaid) |
-| `card_number` | Integer | Anonymized card number |
-| `expires` | String | Expiration date (MM/YYYY) |
-| `cvv` | Integer | Card security code |
-| `has_chip` | Boolean | EMV chip presence (YES/NO) |
-| `num_cards_issued` | Integer | Total cards issued to client (including replacements) |
-| `credit_limit` | Float | Maximum credit limit |
-| `acct_open_date` | String | Account opening date (MM/YYYY) |
-| `year_pin_last_changed` | Integer | Most recent PIN change year (security metric) |
-| `card_on_dark_web` | Boolean | Dark web exposure indicator (Yes/No) |
 
 ### 3. **User Data** (`users_data.csv`)
 - **Size:** 2,000 rows; 14 columns
@@ -108,17 +89,17 @@ The project delivers a multi-faceted dashboard with four main analytical perspec
 
 **Target Audience:** C-level executives, strategic decision-makers
 
+**Insights Delivered:**
+- Transaction volume and value trends
+- User acquisition and retention metrics
+- Revenue trajectory analysis
+- Year-over-year growth comparisons
+
 **Key Metrics (KPIs):**
 - Total Transaction Volume (TTV): Aggregate transaction value
 - Active Users (MAU/DAU): Monthly/daily active transaction participants
 - Revenue & Profitability: Total amount processed with estimated fee revenue
 - User Growth Rate: New account acquisition trends
-
-**Insights Delivered:**
-- Transaction volume and value trends (monthly/quarterly)
-- User acquisition and retention metrics
-- Revenue trajectory analysis
-- Year-over-year growth comparisons
 
 **Strategic Decisions Enabled:**
 - Market expansion opportunities
@@ -131,46 +112,47 @@ The project delivers a multi-faceted dashboard with four main analytical perspec
 
 **Target Audience:** Operations managers, product managers, technical teams
 
+**Insights Delivered:**
+- How each products performance (categorized by card brands, types) (evaluated by number of transactions, volume,...)
+- Merchant categories performance
+- System reliability and error hotspots
+
 **Key Metrics:**
 
-**Card Performance:**
-- Chip Adoption Rate: EMV chip vs magnetic stripe distribution
-- Brand Market Share: Transaction volume by card network (Visa, Mastercard, etc.)
-- Credit Limit Utilization: Average usage vs available credit
+**⚠️ Error & System Reliability Metrics**
 
-**Merchant Analytics:**
-- Top Merchants by Volume: Highest-performing merchant partners
-- MCC Concentration: Transaction distribution across business categories
-- Merchant Success Rates: Transaction approval rates by merchant type
+13. Transaction Success Rate (TSR) (%): Core operational KPI measuring approval performance.   
+15. Failed Transaction Volume
+15. Error Rate by Merchant (%)  
+16. Error Rate by Card Brand (%)  
+17. Top Failure Reason Share (%)  Distribution of rejection causes.  
 
-**Error Analysis:**
-- Transaction Success Rate (TSR): Critical operational health indicator
-- Error Distribution: Breakdown by error codes (system vs user errors)
-- Common Failure Patterns: Insufficient balance, declined transactions, technical errors
+**🪪 Card Performance Metrics**
 
-**Insights Delivered:**
-- Which card brands/types generate the most transactions
-- Merchant categories driving business volume
-- System reliability and error hotspots
-- Infrastructure performance benchmarks
+1. Card Count:
+2. Transaction/Volume Share by Card Brand (%): Percentage of transactions, volume belonging to each card brand.  
+3. Card Type Distribution (%): Distribution of debit, credit, prepaid cards.
+4. Chip Adoption Rate (%): Share of EMV chip transactions vs magnetic stripe.   
+6. Credit Limit Average
+7. Card Age (Days / Months / Years): Measures how long the account existed when the transaction occurred.  
+   Formula: `Snapshot Date - account_open_date`
 
-**Operational Decisions Enabled:**
-- Infrastructure investment priorities
-- Merchant partnership strategies
-- System optimization focus areas
-- Error resolution workflows
+**🏪 Merchant Performance Metrics**
+
+7. Merchant Transaction Share (%): Contribution of each merchant category to total transaction count.  
+8. Merchant Volume Share (%): Contribution of each merchant category to total transaction value.  
+11. Merchant Successful Rate (%)  Percentage of successful transactions per merchant.  
 
 ---
 
 ### 3️⃣ **Customer Segmentation**
 
-**Target Audience:** Marketing teams, product managers, customer success
+**Target Audience:** Marketing teams, product managers
 
 **Key Metrics:**
 - RFM Scores: Recency, Frequency, Monetary analysis
-- Customer Lifetime Value (CLV): Projected long-term value
-- Churn Rate: User attrition analysis
-- Segment Distribution: Whale users vs casual users vs at-risk segments
+- Active Customer Count:
+- Segment Distribution: 
 
 **Insights Delivered:**
 - High-value customer identification ("Whales")
@@ -178,11 +160,6 @@ The project delivers a multi-faceted dashboard with four main analytical perspec
 - User behavior clusters and personas
 - Spending pattern evolution over time
 
-**Marketing Decisions Enabled:**
-- Targeted reward programs for high-value segments
-- Win-back campaigns for at-risk customers
-- Personalized product offerings
-- Customer retention strategies
 
 ---
 
@@ -191,11 +168,12 @@ The project delivers a multi-faceted dashboard with four main analytical perspec
 **Target Audience:** Risk management teams, compliance officers, security analysts
 
 **Key Metrics:**
-- Fraud Rate: By transaction volume and dollar value
+- Fraud Rate %: By transaction volume and dollar value
+- Fraud Volume
+- Fraud User Count
 - Fraudster Profiling: Common characteristics of fraudulent transactions
 - Risk Score Distribution: Transaction-level risk assessment
 - Dark Web Exposure Impact: Cards compromised vs fraud incidence
-- Detection Performance: False positive rate, detection latency
 
 **Insights Delivered:**
 - Fraud pattern identification by transaction type, amount, merchant
@@ -244,12 +222,6 @@ The project delivers a multi-faceted dashboard with four main analytical perspec
 - **Time-Series Analysis:** Identified peak transaction hours, days, and seasonal patterns
 - **Correlation Analysis:** Examined relationships between card security features and fraud rates
 - **Customer Behavior:** Spending patterns by user segments
-
-### 3. Feature Engineering
-- **Security Metrics:** Combined chip status and dark web exposure into risk scores
-- **Temporal Features:** Extracted hour, day, month, year from transaction timestamps
-- **Customer Metrics:** Calculated transaction frequency, average amounts, and recency
-- **Fraud Indicators:** Flagged anomalous amounts, unusual merchant categories, and velocity patterns
 
 ### 4. Dashboard Development (Power BI)
 - **Data Modeling:** Established relationships between tables (star schema)
