@@ -63,6 +63,7 @@ Build an intelligent Business Intelligence Dashboard that provides executives an
 ---
 
 ## 📂 Dataset Description
+- **Data Source:** [Financial Transactions Dataset – Analytics (Kaggle)](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets) 
 
 This comprehensive financial dataset combines transaction records, customer information, and card data from a banking institution across the 2010s decade. The dataset consists of 5 primary components:
 
