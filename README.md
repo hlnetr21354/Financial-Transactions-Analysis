@@ -1,7 +1,7 @@
 # 💹 Financial Transactions Analysis & Fraud Detection
 
 **Author:** Nguyen Quoc Hoang Lan  
-**Duration:** February 6, 2026 - Present  
+**Duration:** February, 2026  
 **Tools:** Python, Power BI  
 **Contact:** nqhl21354@gmail.com
 
@@ -189,11 +189,7 @@ Large-scale preprocessing was performed to ensure data consistency, relational i
 
 ### **Phase 3: Business Intelligence & Dashboard Architecture (Power BI)**
 🏗️ 1️⃣ Data Modeling
-- Implemented a Star Schema architecture:
-- Fact Table: Transactions
-- Dimension Tables: Users, Cards, MCC Codes, Fraud Labels
-- One-to-many relationships
-- Controlled filter propagation to maintain performance
+
 
 🧮 2️⃣ Feature Engineering in Power BI
 - Created calculated columns and derived fields (i.e. card_age, card_active, fraud_flag,...)
