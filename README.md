@@ -10,8 +10,7 @@
 # 📑 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
-- [💼 Business Problem](#-business-problem)
-- [🎯 Project Objectives](#-project-objectives)
+- [💼 Business Problem & Project Objectives](#-business-problem--project-objectives)
 - [📂 Dataset Description](#-dataset-description)
 - [🚀 Project Workflow](#-project-workflow)
 - [📊 Dashboard Strategy](#-dashboard-strategy)
@@ -37,24 +36,22 @@ Using Python for data processing and Power BI for executive dashboards, the proj
 |-----------|-----------|---------|
 | Data Processing | Python (Pandas, NumPy) | Data cleaning, transformation, feature engineering |
 | Visualization | Matplotlib, Seaborn | Exploratory analysis and pattern discovery |
-| Business Intelligence | Power BI | Interactive dashboards and executive reporting |
-| Query Language | DAX | Calculated measures and dynamic KPIs |
+| Business Intelligence | Power BI (DAX) | Interactive dashboards and executive reporting |
 | Data Storage | CSV, JSON | Source data format |
 | Development | Jupyter Notebook, VS Code | Analysis environment |
 
 ---
 
-## 💼 Business Problem
-
+## 💼 Business Problem & Project Objectives
+**💼 Business Problem**:
 Modern financial institutions operate in a data-driven ecosystem where they face critical challenges:
 1. **Fraud Prevention:** Real-time identification of suspicious transactions to minimize financial losses
 2. **Customer Intelligence:** Transaction history analysis for user segmentation and spending behavior prediction to enhance marketing effectiveness
 3. **Operational Excellence:** Performance monitoring and optimization across card types, merchants, and transaction channels
 
 
-## 🎯 Project Objectives
-
-Build an intelligent Business Intelligence Dashboard that provides executives and managers with comprehensive visibility into system health. This dashboard goes beyond traditional reporting to deliver decision support capabilities through:
+**🎯 Project Objectives**:
+Build an intelligent Business Intelligence Dashboard that provides executives and managers with comprehensive view into the whole system health:
 - **Strategic Insights:** Holistic views of business performance and trends
 - **Operational Analytics:** Help monitoring of transaction systems and error patterns
 - **Customer Intelligence:** Deep understanding of user segments and behavior
