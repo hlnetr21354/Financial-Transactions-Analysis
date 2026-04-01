@@ -44,11 +44,7 @@ Using Python for data processing and Power BI for executive dashboards, the proj
 
 ## 💼 Business Problem & Project Objectives
 **💼 Business Problem**:
-Modern financial institutions operate in a data-driven ecosystem where they face critical challenges:
-1. **Fraud Prevention:** Real-time identification of suspicious transactions to minimize financial losses
-2. **Customer Intelligence:** Transaction history analysis for user segmentation and spending behavior prediction to enhance marketing effectiveness
-3. **Operational Excellence:** Performance monitoring and optimization across card types, merchants, and transaction channels
-
+Modern financial institutions operate in a data-driven ecosystem, facing critical challenges in fraud prevention, customer intelligence, and operational excellence. To effectively address these areas, a centralized tracking dashboard is essential for real-time monitoring, analysis, and decision-making
 
 **🎯 Project Objectives**:
 Build an intelligent Business Intelligence Dashboard that provides executives and managers with comprehensive view into the whole system health:
@@ -71,38 +67,93 @@ This comprehensive financial dataset combines transaction records, customer info
 ### 1. **Transaction Data** (`transactions_data.csv`)
 - **Size:** 13,305,915 rows; 12 columns
 - **Description:** Detailed transaction records with timestamps, amounts, merchants, and error codes
-- **Key Features:**
-  - Transaction ID, date, time, and amount
-  - Merchant information and category codes (MCC)
-  - Error codes and transaction status
-  - Card and user identifiers
+  <details>
+  <summary>Data Dictionary - transactions_data</summary>
+
+  | Column Name        | Data Type  | Description |
+  |--------------------|------------|-------------|
+  | **id**              | Integer    | Unique identifier for each transaction record. |
+  | **date**            | Datetime   | Timestamp of the transaction (date and time when the transaction occurred). |
+  | **client_id**        | Integer    | Unique identifier of the customer who made the transaction. |
+  | **card_id**          | Integer    | Unique identifier of the credit card used in the transaction. |
+  | **amount**            | Float      | Transaction amount in USD, including negative values for refunds or chargebacks. |
+  | **use_chip**          | String     | Transaction method (Swipe Transaction, Chip Transaction, Online Transaction). |
+  | **merchant_id**       | Integer    | Unique identifier of the merchant where the transaction took place. |
+  | **merchant_city**     | String     | City where the merchant is located. |
+  | **merchant_state**    | String     | State or region where the merchant is located (US state abbreviation). |
+  | **zip**               | String     | ZIP/postal code of the merchant location. |
+  | **mcc**               | Integer    | Merchant Category Code (MCC), which classifies the merchant’s business type. |
+  | **errors**            | String     | Error or anomaly flags related to the transaction (e.g., declined, processing errors). Missing values indicate no detected errors. |
+
+  </details>
 
 ### 2. **Card Information** (`cards_data.csv`)
 - **Size:** 6,146 rows; 13 columns
 - **Description:** Credit and debit card details linked to customer accounts
-- **Key Features:**
+  <details>
+  <summary>Data Dictionary - cards_data</summary>
+  | Column Name | Data Type | Description |
+  |-------------|-----------|-------------|
+  | **id** | Integer | Unique identifier for each card record. |
+  | **client_id** | Integer | Unique identifier of the client who owns the card. |
+  | **card_brand** | String | Card network provider (e.g., Visa, Mastercard). |
+  | **card_type** | String | Type of card issued (e.g., Debit, Credit, Prepaid). |
+  | **card_number** | Integer | Masked or anonymized card number identifier. Used only for record uniqueness, not real card data. |
+  | **expires** | String / Date | Card expiration date in MM/YYYY format. |
+  | **cvv** | Integer | Card verification value (security code). Typically anonymized or synthetic for privacy. |
+  | **has_chip** | Boolean | Indicates whether the card has an EMV chip (`YES` / `NO`). |
+  | **num_cards_issued** | Integer | Number of cards issued to the client (including replacements and duplicates). |
+  | **credit_limit** | Float | Maximum credit limit assigned to the card account. |
+  | **acct_open_date** | String / Date | Date when the card account was first opened. |
+  | **year_pin_last_changed** | Integer | The most recent year the card PIN was changed, used to evaluate security hygiene. |
+  | **card_on_dark_web** | Boolean | Indicates whether the card information has been detected on dark web marketplaces (Yes/No). |
+  </details>
 
 ### 3. **User Data** (`users_data.csv`)
 - **Size:** 2,000 rows; 14 columns
 - **Description:** Demographic and account information for customers
-- **Key Features:**
-  - Customer demographics
-  - Account-level details
-  - Credit scores and financial profiles
+  <details>
+  <summary>Data Dictionary - users_data</summary>
+  | Column Name | Data Type | Description |
+  |-------------|-----------|-------------|
+  | **id** | Integer | Unique identifier for each client. |
+  | **current_age** | Integer | Current age of the client. |
+  | **retirement_age** | Integer | Expected retirement age of the client. |
+  | **birth_year** | Integer | Year of birth of the client. |
+  | **birth_month** | Integer | Month of birth of the client (1–12). |
+  | **gender** | String | Gender of the client (e.g., Male, Female). |
+  | **address** | String | Residential address of the client. |
+  | **latitude** | Float | Latitude coordinate of the client’s residence. |
+  | **longitude** | Float | Longitude coordinate of the client’s residence. |
+  | **per_capita_income** | String | Income per person in the household, stored as a currency string. |
+  | **yearly_income** | String | Annual income of the client, stored as a currency string. |
+  | **total_debt** | String | Total outstanding debt of the client, stored as a currency string. |
+  | **credit_score** | Integer | Credit score indicating the client’s creditworthiness. Higher scores represent lower credit risk. |
+  | **num_credit_cards** | Integer | Number of credit cards owned by the client. |
+  </details>
 
 ### 4. **Fraud Labels** (`train_fraud_labels.json`)
 - **Size:** 8,914,963 rows; 2 columns
 - **Description:** Binary classification labels for transaction fraud status
 - **Format:** JSON with transaction ID mapped to fraud label (Yes/No)
+  <details>
+  <summary>Data Dictionary - train_fraud_labels</summary>
+  | Column Name | Data Type | Description |
+  |-------------|-----------|-------------|
+  | **transaction_id** | Integer | Unique identifier for each transactions. |
+  | **fraud_label** | String | Indicates whether the transactions is identified as fraud |
+  </details>
 
 ### 5. **Merchant Category Codes** (`mcc_codes.json`)
 - **Size:** 109 rows; 2 columns
 - **Description:** Industry-standard classification codes for business types
-- **Examples:**
-  - 5812: Eating Places and Restaurants
-  - 5541: Service Stations (Gas)
-  - 5411: Grocery Stores, Supermarkets
-  - 7996: Amusement Parks, Carnivals, Circuses
+  <details>
+  <summary>Data Dictionary - mcc_codes</summary>
+  | Column Name | Data Type | Description |
+  |-------------|-----------|-------------|
+  | **mcc_code** | Integer | Unique Merchant Category Code identifying a specific type of business or service |
+  | **description** | String | Text description of the merchant category associated with the MCC code |
+  </details>
 
 
 ## 🚀 Project Workflow
@@ -116,8 +167,7 @@ Large-scale preprocessing was performed to ensure data consistency, relational i
 
 **Multi-Source Data Integration**
 - Loaded structured (CSV) and semi-structured (JSON) datasets
-- Converted fraud label JSON into relational format
-- Standardized Merchant Category Code (MCC) lookup table
+- Converted fraud label and Merchant Category Code JSON into relational and standardized format
 - Merged transaction, card, user, and fraud datasets
 
 **Data Type Normalization & Financial Cleaning**
@@ -130,7 +180,6 @@ Large-scale preprocessing was performed to ensure data consistency, relational i
 **Multi-Label Error Decomposition**
 - Transaction errors contained comma-separated categories.
 - Exploded them into atomic rows for accurate frequency analysis:
-
 
 
 ### **Phase 2: Exploratory Data Analysis (EDA)**
