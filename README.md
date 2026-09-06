@@ -26,9 +26,9 @@
 ## 🎯 Project Overview
 
 
-This project analyzes 13M+ financial transactions to evaluate business performance, operational reliability, customer behavior, and fraud exposure. 
+This project analyzes 13M+ card transactions to evaluate business performance, operational reliability, customer behavior, and fraud exposure. 
 
-Using Python for data processing and Power BI for executive dashboards, the project transforms raw transactional data into strategic decision-support insights for financial institutions.
+Using Python (DuckDB, Pandas, etc.) for data processing and Power BI for executive dashboards, the project transforms raw transactional data into strategic decision-support insights for financial institutions.
 
 ### 🛠️ Technical Stack Summary
 
@@ -58,7 +58,7 @@ Build an intelligent Business Intelligence Dashboard that provides executives an
 ## 📂 Dataset Description
 - **Data Source:** [Financial Transactions Dataset – Analytics (Kaggle)](https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets) 
 
-This comprehensive financial dataset combines transaction records, customer information, and card data from a banking institution across the 2010s decade. The dataset consists of 5 primary components:
+This comprehensive financial dataset combines card-based transaction records, customer information, and card data from a banking institution across the 2010s decade. The dataset consists of 5 primary components:
 
 ### 📊Data Relationships
 
@@ -66,7 +66,7 @@ This comprehensive financial dataset combines transaction records, customer info
 
 ### 1. **Transaction Data** (`transactions_data.csv`)
 - **Size:** 13,305,915 rows; 12 columns
-- **Description:** Detailed transaction records with timestamps, amounts, merchants, and error codes
+- **Description:** Detailed card transaction records with timestamps, amounts, merchants, and error codes
   <details>
   <summary>Data Dictionary - transactions_data</summary>
 
@@ -155,6 +155,34 @@ This comprehensive financial dataset combines transaction records, customer info
   | **description** | String | Text description of the merchant category associated with the MCC code |
   </details>
 
+
+## 🗂️ Code Structure
+
+The Python side of the project is split into three layers so a single transform
+rule only ever needs to be changed in one place:
+
+```text
+Financial-Transactions-Analysis/
+├── src/
+│   ├── load.py       # read raw cards/users/mcc_codes/transactions/fraud_labels
+│   ├── clean.py      # fix raw formatting (e.g. "$1,234" -> 1234.0)
+│   ├── transform.py  # reshape into the final tables (merchants, errors, fraud join, ...)
+│   └── export.py      # write final tables to transformed_data/*.csv
+├── pipeline.py        # orchestrates load -> clean -> transform -> export, run with `python pipeline.py`
+└── notebook/
+    └── transform_data_eda.ipynb   # EDA + calls the same src/ functions to sanity-check each step
+```
+
+- **`notebook/transform_data_eda.ipynb`** is the exploration space: run cell by cell,
+  read the `.describe()`/plots/markdown notes, and decide whether a transform is
+  correct. It's for checking, not for producing the final output.
+- **`pipeline.py`** is the one that actually produces `transformed_data/*.csv` for
+  Power BI. Run `python pipeline.py` once it's confirmed correct in the notebook.
+- Both the notebook and `pipeline.py` import from `src/`, so a fix only needs to
+  be written once and both places pick it up automatically.
+- Inside `pipeline.py`, tables whose upstream logic hasn't changed since the last
+  export are commented out (e.g. `# cards_df = ...`) to skip re-processing them
+  on every run — uncomment a block only when that table's logic actually changed.
 
 ## 🚀 Project Workflow
 This project was executed following a structured analytical pipeline, transforming raw transactional data (13M+ rows) into a scalable Business Intelligence system.
