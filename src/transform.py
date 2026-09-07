@@ -5,6 +5,27 @@ import time
 import duckdb
 import pandas as pd
 
+def new_user_label(txn_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Create a new DataFrame with the first transaction date for each client.
+
+    Parameters:
+    txn_df (pd.DataFrame): The transactions DataFrame containing 'client_id' and 'date' columns.
+
+    Returns:
+    pd.DataFrame: A new DataFrame with 'client_id' and 'first_transaction_date' columns.
+    """
+
+    join_rel = duckdb.sql("""
+        SELECT 
+            txn_df.*,
+            CASE WHEN date = MIN(date) OVER (PARTITION BY client_id) THEN True ELSE False END AS new_user
+        FROM txn_df 
+    """)
+
+    txn_new_user_df = join_rel.arrow().read_all().to_pandas(split_blocks=True, self_destruct = True)
+
+    return txn_new_user_df
 
 def add_is_domestic(txn_df: pd.DataFrame) -> pd.DataFrame:
     """Flag transactions as domestic vs. foreign.
